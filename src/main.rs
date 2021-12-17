@@ -1,12 +1,14 @@
+use custom_button::CustomButton;
 use gtk::glib;
 use gtk::glib::*;
 use gtk::prelude::*;
 use gtk::Application;
 use gtk::ApplicationWindow;
-use gtk::Button;
 use gtk::Orientation;
 use std::cell::Cell;
 use std::rc::Rc;
+
+pub mod custom_button;
 
 fn main() {
     let app = Application::builder()
@@ -18,14 +20,13 @@ fn main() {
     app.run();
 }
 
-fn build_button(text: &str) -> Button {
-    Button::builder()
-        .label(text)
-        .margin_top(12)
-        .margin_bottom(12)
-        .margin_end(12)
-        .margin_start(12)
-        .build()
+fn build_button(text: &str) -> CustomButton {
+    let button = CustomButton::with_label(text);
+    button.set_margin_top(12);
+    button.set_margin_bottom(12);
+    button.set_margin_end(12);
+    button.set_margin_start(12);
+    button
 }
 
 fn build_ui(app: &Application) {
